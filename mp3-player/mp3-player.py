@@ -48,7 +48,6 @@ class MusicPlayer:
     songtrack = tk.Label(trackframe,textvariable=self.track,width=20,font=("times new roman",24,"bold"),bg="grey",fg="gold").grid(row=0,column=0,padx=10,pady=5)
     # Inserts status label
     trackstatus = tk.Label(trackframe,textvariable=self.status,font=("times new roman",24,"bold"),bg="grey",fg="gold").grid(row=0,column=1,padx=10,pady=5)
-    self.status = "HA"
     # creating button frame
     buttonframe = tk.LabelFrame(self.root,text="Control Panel",font=("times new roman",15,"bold"),bg="grey",fg="white",bd=5,relief="groove")
     buttonframe.place(x=0,y=100,width=600,height=100)
@@ -91,12 +90,11 @@ class MusicPlayer:
   def playsong(self):
 
     # Sets track to the selected track
-    self.track = self.playlist.get("active")
-    songpath = path + "/" + self.track
+    self.track.set(self.playlist.get("active"))
+    songpath = path + "/" + self.playlist.get("active")
 
     # 8. Set status to "Playing"
-    self.status = "Playing"
-    print(self.status)
+    self.status.set("Playing")
 
     # 9. Load track to pygame mixer
     #I don't think this is the right one yet
@@ -110,7 +108,7 @@ class MusicPlayer:
   def stopsong(self):
 
     # 11. Set status to "Stopped"
-    self.status = "Stopped"
+    self.status.set("Stopped")
 
     # 12. Stop song
     pygame.mixer.music.stop()
@@ -119,7 +117,7 @@ class MusicPlayer:
   def pausesong(self):
 
     # 13. Set status to "Paused"
-    self.status = "Paused"
+    self.status.set("Paused")
 
     # 14. Pause song
     pygame.mixer.music.pause()
